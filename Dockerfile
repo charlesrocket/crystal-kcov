@@ -3,4 +3,6 @@ FROM kcov/kcov:latest
 RUN apt-get update && \
     apt-get install -y git curl openssl bash gnupg apt-transport-https ca-certificates
 
-RUN curl -fsSL https://crystal-lang.org/install.sh | bash
+RUN curl -o install.sh -fsSL https://crystal-lang.org/install.sh
+
+RUN bash install.sh --version=1.3 --channel=stable
