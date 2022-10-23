@@ -1,6 +1,10 @@
 name: Build
 
-on: [push, pull_request]
+on:
+  pull_request:
+  push:
+  schedule:
+    - cron: "35 1 * * 0"
 
 jobs:
   docker:
@@ -14,8 +18,17 @@ jobs:
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
+          password: ${{ secrets.DOCKERHUB_TOKEN }
+
+      - name: Build
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: false
+          tags: charlie137/crystal-kcov:latest
+
+      - name: Push
+        if: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/master') || github.event_name == 'schedule' }}
         id: docker_build
         uses: docker/build-push-action@v2
         with:
