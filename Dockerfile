@@ -5,4 +5,4 @@ RUN apt-get update && \
 
 RUN curl -o install.sh -fsSL https://crystal-lang.org/install.sh
 
-RUN bash install.sh --version=1.6 --channel=stable
+RUN bash install.sh --version=latest --channel=stable
