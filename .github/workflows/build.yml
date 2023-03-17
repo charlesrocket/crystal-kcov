@@ -19,6 +19,7 @@ jobs:
           tags: charlesrocket/crystal-kcov:latest
 
   push:
+    needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     permissions:
