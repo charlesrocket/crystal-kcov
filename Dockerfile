@@ -1,4 +1,5 @@
 FROM kcov/kcov:latest
+LABEL maintainer="charlesrocket"
 
 RUN apt-get update && \
     apt-get install -y git curl openssl bash gnupg apt-transport-https ca-certificates
